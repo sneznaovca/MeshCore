@@ -140,15 +140,16 @@ static const uint8_t bt_off_icon[] = {
 // "GPS" label, 13x5px, 2 bytes/row, MSB = leftmost pixel
 // Shown in status bar when GPS is active
 // Visual (G cols 0-3, P cols 5-8, S cols 10-12):
-//   .XX..XXX..XXX
+//   .XX..XXX...XX
 //   X....X..X.X..
-//   X.XX.XXX..XXX
+//   X.XX.XXX...XX
 //   X..X.X.....X.
-//   .XX..X....XXX
+//   .XX..X....XX.
+// S uses partial bars (.XX top/mid, XX. bottom) to avoid confusion with digit 5
 static const uint8_t gps_icon[] = {
-  0x67, 0x38,
+  0x67, 0x18,
   0x84, 0xA0,
-  0xB7, 0x38,
+  0xB7, 0x18,
   0x94, 0x08,
-  0x64, 0x38,
+  0x64, 0x30,
 };
