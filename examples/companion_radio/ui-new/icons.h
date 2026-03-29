@@ -121,18 +121,18 @@ static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
 
-// "BT" label, 9x5px, 2 bytes/row, MSB = leftmost pixel
+// "BT" label, 9x5px bitmap rendered in a 10px-wide inverted box, 2 bytes/row, MSB = leftmost pixel
 // Shown in status bar when Bluetooth is disabled.
-// B starts at col 1 (not col 0) so all strokes get 2 physical pixels
-// at eInk scale_x=1.953 — col 0 only gets 1px which makes B look like 3.
+// Col 0 and col 9 are empty → 1-col black border on both sides of the box
+// at eInk scale_x=1.953 (col 0 only gets 1px, but it's padding so that's fine).
 // T crossbar is 3-wide (cols 6-8, stem at col 7) so both arms are symmetric
 // at 2x physical width (1 logical px each side of stem).
-// Visual (B cols 1-3, T cols 6-8):
-//   .XXX..XXX
-//   .X..X..X.
-//   .XXX...X.
-//   .X..X..X.
-//   .XXX...X.
+// Visual (B cols 1-3, T cols 6-8, col 9 empty/border):
+//   .XXX..XXX.
+//   .X..X..X..
+//   .XXX...X..
+//   .X..X..X..
+//   .XXX...X..
 static const uint8_t bt_off_icon[] = {
   0x73, 0x80,
   0x49, 0x00,
