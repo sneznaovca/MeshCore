@@ -147,19 +147,19 @@ class HomeScreen : public UIScreen {
     }
 #endif
     if (!_task->isSerialEnabled()) {
-      statusX -= 12;  // 10px + 2px gap
+      statusX -= 11;  // 9px + 2px gap
       // inverted (white-on-black): universally signals a disabled state
       display.setColor(DisplayDriver::LIGHT);
-      display.fillRect(statusX, iconY + 1, 10, 7);
+      display.fillRect(statusX, iconY + 1, 9, 7);
       display.setColor(DisplayDriver::DARK);
-      display.drawXbm(statusX, iconY + 2, bt_off_icon, 10, 5);
+      display.drawXbm(statusX, iconY + 2, bt_off_icon, 9, 5);
       display.setColor(DisplayDriver::LIGHT);
     }
 #if ENV_INCLUDE_GPS == 1
     if (_task->getGPSState()) {
-      statusX -= 15;  // 13px + 2px gap
+      statusX -= 16;  // 14px + 2px gap
       display.setColor(DisplayDriver::GREEN);
-      display.drawXbm(statusX, iconY + 2, gps_icon, 13, 5);
+      display.drawXbm(statusX, iconY + 2, gps_icon, 14, 5);
     }
 #endif
   }

@@ -121,37 +121,41 @@ static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
 
-// "BT" label, 10x5px, 2 bytes/row, MSB = leftmost pixel
+// "BT" label, 9x5px, 2 bytes/row, MSB = leftmost pixel
 // Shown in status bar when Bluetooth is disabled.
 // B starts at col 1 (not col 0) so all strokes get 2 physical pixels
 // at eInk scale_x=1.953 — col 0 only gets 1px which makes B look like 3.
-// Visual (B cols 1-4, T cols 6-9):
-//   .XXX.XXXX.
-//   .X..X..X..
-//   .XXX...X..
-//   .X..X..X..
-//   .XXX...X..
+// T crossbar is 3-wide (cols 6-8, stem at col 7) so both arms are symmetric
+// at 2x physical width (1 logical px each side of stem).
+// Visual (B cols 1-3, T cols 6-8):
+//   .XXX..XXX
+//   .X..X..X.
+//   .XXX...X.
+//   .X..X..X.
+//   .XXX...X.
 static const uint8_t bt_off_icon[] = {
-  0x73, 0xC0,
+  0x73, 0x80,
   0x49, 0x00,
   0x71, 0x00,
   0x49, 0x00,
   0x71, 0x00,
 };
 
-// "GPS" label, 13x5px, 2 bytes/row, MSB = leftmost pixel
+// "GPS" label, 14x5px, 2 bytes/row, MSB = leftmost pixel
 // Shown in status bar when GPS is active
-// Visual (G cols 0-3, P cols 5-8, S cols 10-12):
-//   .XX..XXX...XX
-//   X....X..X.X..
-//   X.XX.XXX...XX
-//   X..X.X.....X.
-//   .XX..X....XX.
+// All letters start at col >= 1 so all strokes get 2 physical pixels
+// at eInk scale_x=1.953 — col 0 only gets 1px which makes G look thinner than P.
+// Visual (G cols 1-4, P cols 6-9, S cols 11-13):
+//   ..XX..XXX...XX
+//   .X....X..X.X..
+//   .X.XX.XXX...XX
+//   .X..X.X......X
+//   ..XX..X....XX.
 // S uses partial bars (.XX top/mid, XX. bottom) to avoid confusion with digit 5
 static const uint8_t gps_icon[] = {
-  0x67, 0x18,
-  0x84, 0xA0,
-  0xB7, 0x18,
-  0x94, 0x08,
-  0x64, 0x30,
+  0x33, 0x8C,
+  0x42, 0x50,
+  0x5B, 0x8C,
+  0x4A, 0x04,
+  0x32, 0x18,
 };
