@@ -150,12 +150,13 @@ static const uint8_t bt_off_icon[] = {
 //   .X....X..X.X..
 //   .X.XX.XXX...XX
 //   .X..X.X......X
-//   ..XX..X....XX.
-// S uses partial bars (.XX top/mid, XX. bottom) to avoid confusion with digit 5
+//   ..XX..X....X..
+// S: .XX top/mid arcs (2px right), X.. bottom arc (1px far-left);
+// single-pixel bottom removes the extra col vs top and avoids digit-5 confusion
 static const uint8_t gps_icon[] = {
   0x33, 0x8C,
   0x42, 0x50,
   0x5B, 0x8C,
   0x4A, 0x04,
-  0x32, 0x18,
+  0x32, 0x10,
 };
