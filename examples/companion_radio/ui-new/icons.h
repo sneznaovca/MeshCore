@@ -141,6 +141,41 @@ static const uint8_t bt_off_icon[] = {
   0x71, 0x00,
 };
 
+// "BT" with horizontal strikethrough, 10x5px, non-inverted (draw in GREEN/BLACK directly).
+// Row 2 is a solid bar across cols 1-9, overlaying the normal BT mid-row.
+// Visual:
+//   .XXX..XXX.
+//   .X..X..X..
+//   .XXXXXXXXX  ← strikethrough
+//   .X..X..X..
+//   .XXX...X..
+static const uint8_t bt_off_strike[] = {
+  0x73, 0x80,
+  0x49, 0x00,
+  0x7F, 0xC0,
+  0x49, 0x00,
+  0x71, 0x00,
+};
+
+// "BT" with a small 3-wide X marker at cols 10-12, 13x5px, non-inverted.
+// X element occupies rows 1-3 only (cols 10,12 in rows 1,3; col 11 in row 2).
+// At eInk scale_x=1.953 the X renders as two 2px diagonal arms with a 2px gap:
+//   XX..XX  (rows 1,3)
+//   ..XX..  (row 2)
+// Visual (B cols 1-3, T cols 6-8, X cols 10-12):
+//   .XXX..XXX....
+//   .X..X..X..X.X
+//   .XXX...X...X.
+//   .X..X..X..X.X
+//   .XXX...X.....
+static const uint8_t bt_off_x_icon[] = {
+  0x73, 0x80,
+  0x49, 0x28,
+  0x71, 0x10,
+  0x49, 0x28,
+  0x71, 0x00,
+};
+
 // "GPS" label, 14x5px, 2 bytes/row, MSB = leftmost pixel
 // Shown in status bar when GPS is active
 // All letters start at col >= 1 so all strokes get 2 physical pixels
