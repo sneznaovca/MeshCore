@@ -121,20 +121,22 @@ static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
 
-// "BT" label, 9x5px, 2 bytes/row, MSB = leftmost pixel
-// Shown in status bar when Bluetooth is disabled
-// Visual (B cols 0-3, T cols 5-8):
-//   XXX..XXXX
-//   X..X..X..
-//   XXX...X..
-//   X..X..X..
-//   XXX...X..
+// "BT" label, 10x5px, 2 bytes/row, MSB = leftmost pixel
+// Shown in status bar when Bluetooth is disabled.
+// B starts at col 1 (not col 0) so all strokes get 2 physical pixels
+// at eInk scale_x=1.953 — col 0 only gets 1px which makes B look like 3.
+// Visual (B cols 1-4, T cols 6-9):
+//   .XXX.XXXX.
+//   .X..X..X..
+//   .XXX...X..
+//   .X..X..X..
+//   .XXX...X..
 static const uint8_t bt_off_icon[] = {
-  0xE7, 0x80,
-  0x92, 0x00,
-  0xE2, 0x00,
-  0x92, 0x00,
-  0xE2, 0x00,
+  0x73, 0xC0,
+  0x49, 0x00,
+  0x71, 0x00,
+  0x49, 0x00,
+  0x71, 0x00,
 };
 
 // "GPS" label, 13x5px, 2 bytes/row, MSB = leftmost pixel
