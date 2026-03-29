@@ -138,22 +138,26 @@ class HomeScreen : public UIScreen {
     display.fillRect(iconX + 2, iconY + 2, fillWidth, iconHeight - 4);
 
     // status icons packed left of the battery, right-to-left: muted, bt_off, gps
-    int statusX = iconX - 1;
+    int statusX = iconX - 2;
 #ifdef PIN_BUZZER
     if (_task->isBuzzerQuiet()) {
-      statusX -= 9;
+      statusX -= 10;  // 8px + 2px gap
       display.setColor(DisplayDriver::RED);
       display.drawXbm(statusX, iconY + 1, muted_icon, 8, 8);
     }
 #endif
     if (!_task->isSerialEnabled()) {
-      statusX -= 10;
+      statusX -= 11;  // 9px + 2px gap
+      // inverted (white-on-black): universally signals a disabled state
       display.setColor(DisplayDriver::LIGHT);
+      display.fillRect(statusX, iconY + 1, 9, 7);
+      display.setColor(DisplayDriver::DARK);
       display.drawXbm(statusX, iconY + 2, bt_off_icon, 9, 5);
+      display.setColor(DisplayDriver::LIGHT);
     }
 #if ENV_INCLUDE_GPS == 1
     if (_task->getGPSState()) {
-      statusX -= 14;
+      statusX -= 15;  // 13px + 2px gap
       display.setColor(DisplayDriver::GREEN);
       display.drawXbm(statusX, iconY + 2, gps_icon, 13, 5);
     }
