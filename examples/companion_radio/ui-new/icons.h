@@ -121,14 +121,34 @@ static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
 
-// 8x8 Bluetooth symbol (shown when BT is disabled)
-// MSB = leftmost pixel; visual: ᛒ-shaped glyph
+// "BT" label, 9x5px, 2 bytes/row, MSB = leftmost pixel
+// Shown in status bar when Bluetooth is disabled
+// Visual (B cols 0-3, T cols 5-8):
+//   XXX..XXXX
+//   X..X..X..
+//   XXX...X..
+//   X..X..X..
+//   XXX...X..
 static const uint8_t bt_off_icon[] = {
-  0x20, 0x60, 0xD0, 0x60, 0xD0, 0x60, 0x20, 0x00
+  0xE7, 0x80,
+  0x92, 0x00,
+  0xE2, 0x00,
+  0x92, 0x00,
+  0xE2, 0x00,
 };
 
-// 8x8 location-pin icon (shown when GPS is active)
-// MSB = leftmost pixel; circle + stem
+// "GPS" label, 13x5px, 2 bytes/row, MSB = leftmost pixel
+// Shown in status bar when GPS is active
+// Visual (G cols 0-3, P cols 5-8, S cols 10-12):
+//   .XX..XXX..XXX
+//   X....X..X.X..
+//   X.XX.XXX..XXX
+//   X..X.X.....X.
+//   .XX..X....XXX
 static const uint8_t gps_icon[] = {
-  0x70, 0x88, 0xA8, 0x88, 0x70, 0x20, 0x20, 0x00
+  0x67, 0x38,
+  0x84, 0xA0,
+  0xB7, 0x38,
+  0x94, 0x08,
+  0x64, 0x38,
 };

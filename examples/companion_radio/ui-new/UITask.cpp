@@ -147,15 +147,15 @@ class HomeScreen : public UIScreen {
     }
 #endif
     if (!_task->isSerialEnabled()) {
-      statusX -= 9;
+      statusX -= 10;
       display.setColor(DisplayDriver::LIGHT);
-      display.drawXbm(statusX, iconY + 1, bt_off_icon, 8, 8);
+      display.drawXbm(statusX, iconY + 2, bt_off_icon, 9, 5);
     }
 #if ENV_INCLUDE_GPS == 1
     if (_task->getGPSState()) {
-      statusX -= 9;
+      statusX -= 14;
       display.setColor(DisplayDriver::GREEN);
-      display.drawXbm(statusX, iconY + 1, gps_icon, 8, 8);
+      display.drawXbm(statusX, iconY + 2, gps_icon, 13, 5);
     }
 #endif
   }
