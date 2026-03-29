@@ -121,59 +121,74 @@ static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
 
-// "BT" label, 9x5px bitmap rendered in a 10px-wide inverted box, 2 bytes/row, MSB = leftmost pixel
-// Shown in status bar when Bluetooth is disabled.
-// Col 0 and col 9 are empty → 1-col black border on both sides of the box
-// at eInk scale_x=1.953 (col 0 only gets 1px, but it's padding so that's fine).
-// T crossbar is 3-wide (cols 6-8, stem at col 7) so both arms are symmetric
-// at 2x physical width (1 logical px each side of stem).
-// Visual (B cols 1-3, T cols 6-8, col 9 empty/border):
+// "BT" label, 10x8px, 2 bytes/row, MSB = leftmost pixel.
+// 8 rows tall to match muted_icon height; BT text in rows 1-5, padding at 0,6,7.
+// Col 0 and col 9 empty → 1-col black border on both sides of inverted box.
+// T crossbar 3-wide (cols 6-8, stem col 7) → symmetric 2px physical arms.
+// Visual (B cols 1-3, T cols 6-8):
+//   ..........  row 0 padding
 //   .XXX..XXX.
 //   .X..X..X..
 //   .XXX...X..
 //   .X..X..X..
 //   .XXX...X..
+//   ..........  row 6-7 padding
 static const uint8_t bt_off_icon[] = {
+  0x00, 0x00,
   0x73, 0x80,
   0x49, 0x00,
   0x71, 0x00,
   0x49, 0x00,
   0x71, 0x00,
+  0x00, 0x00,
+  0x00, 0x00,
 };
 
-// "BT" with horizontal strikethrough, 10x5px, non-inverted (draw in GREEN/BLACK directly).
-// Row 2 is a solid bar across cols 1-9, overlaying the normal BT mid-row.
+// "BT" with horizontal strikethrough, 10x8px, non-inverted.
+// BT text in rows 1-5 with row 3 (middle) replaced by a full bar.
 // Visual:
+//   ..........  row 0 padding
 //   .XXX..XXX.
 //   .X..X..X..
 //   .XXXXXXXXX  ← strikethrough
 //   .X..X..X..
 //   .XXX...X..
+//   ..........  row 6-7 padding
 static const uint8_t bt_off_strike[] = {
+  0x00, 0x00,
   0x73, 0x80,
   0x49, 0x00,
   0x7F, 0xC0,
   0x49, 0x00,
   0x71, 0x00,
+  0x00, 0x00,
+  0x00, 0x00,
 };
 
-// "BT" with a small 3-wide X marker at cols 10-12, 13x5px, non-inverted.
-// X element occupies rows 1-3 only (cols 10,12 in rows 1,3; col 11 in row 2).
-// At eInk scale_x=1.953 the X renders as two 2px diagonal arms with a 2px gap:
-//   XX..XX  (rows 1,3)
-//   ..XX..  (row 2)
+// "BT" + X marker, 13x8px, non-inverted. Matches muted_icon height (8 rows).
+// X at cols 10-12 uses the same doubled-row pattern as muted_icon (2 rows per arm)
+// so it renders at the same visual weight:
+//   rows 1-2: X.X  (top arms, cols 10,12)
+//   rows 3-4: .X.  (center, col 11)
+//   rows 5-6: X.X  (bottom arms, cols 10,12)
 // Visual (B cols 1-3, T cols 6-8, X cols 10-12):
-//   .XXX..XXX....
+//   .............  row 0 padding
+//   .XXX..XXX.X.X
 //   .X..X..X..X.X
 //   .XXX...X...X.
-//   .X..X..X..X.X
-//   .XXX...X.....
+//   .X..X..X...X.
+//   .XXX...X..X.X
+//   ..........X.X  (X arm below BT baseline)
+//   .............  row 7 padding
 static const uint8_t bt_off_x_icon[] = {
-  0x73, 0x80,
+  0x00, 0x00,
+  0x73, 0xA8,
   0x49, 0x28,
   0x71, 0x10,
-  0x49, 0x28,
-  0x71, 0x00,
+  0x49, 0x10,
+  0x71, 0x28,
+  0x00, 0x28,
+  0x00, 0x00,
 };
 
 // "GPS" label, 14x5px, 2 bytes/row, MSB = leftmost pixel
@@ -186,12 +201,11 @@ static const uint8_t bt_off_x_icon[] = {
 //   .X.XX.XXX...XX
 //   .X..X.X......X
 //   ..XX..X....X..
-// S: .XX top/mid arcs (2px right), X.. bottom arc (1px far-left);
-// single-pixel bottom removes the extra col vs top and avoids digit-5 confusion
+// S uses partial bars to avoid digit-5: .XX top/mid (2px right), XX. bottom (2px left)
 static const uint8_t gps_icon[] = {
   0x33, 0x8C,
   0x42, 0x50,
   0x5B, 0x8C,
   0x4A, 0x04,
-  0x32, 0x10,
+  0x32, 0x18,
 };

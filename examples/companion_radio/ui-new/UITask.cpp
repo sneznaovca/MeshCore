@@ -148,20 +148,20 @@ class HomeScreen : public UIScreen {
 #endif
     if (!_task->isSerialEnabled()) {
       // Three styles shown side by side for comparison — keep only one before merging.
-      // Option C: "BT" + small X marker, non-inverted (13px)
+      // Option C: "BT" + X marker, non-inverted (13x8px)
       statusX -= 15;  // 13px + 2px gap
       display.setColor(DisplayDriver::GREEN);
-      display.drawXbm(statusX, iconY + 2, bt_off_x_icon, 13, 5);
-      // Option B: strikethrough, non-inverted (10px)
+      display.drawXbm(statusX, iconY + 1, bt_off_x_icon, 13, 8);
+      // Option B: strikethrough, non-inverted (10x8px)
       statusX -= 12;  // 10px + 2px gap
       display.setColor(DisplayDriver::GREEN);
-      display.drawXbm(statusX, iconY + 2, bt_off_strike, 10, 5);
-      // Option A: inverted "BT" box (10px)
+      display.drawXbm(statusX, iconY + 1, bt_off_strike, 10, 8);
+      // Option A: inverted "BT" box (10x8px)
       statusX -= 12;  // 10px + 2px gap
       display.setColor(DisplayDriver::LIGHT);
-      display.fillRect(statusX, iconY + 1, 10, 7);
+      display.fillRect(statusX, iconY + 1, 10, 8);
       display.setColor(DisplayDriver::DARK);
-      display.drawXbm(statusX, iconY + 2, bt_off_icon, 10, 5);
+      display.drawXbm(statusX, iconY + 1, bt_off_icon, 10, 8);
       display.setColor(DisplayDriver::LIGHT);
     }
 #if ENV_INCLUDE_GPS == 1
