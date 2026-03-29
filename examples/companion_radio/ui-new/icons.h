@@ -120,3 +120,15 @@ static const uint8_t advert_icon[] = {
 static const uint8_t muted_icon[] = {
   0x20, 0x6a, 0xea, 0xe4, 0xe4, 0xea, 0x6a, 0x20
 };
+
+// 8x8 Bluetooth symbol (shown when BT is disabled)
+// MSB = leftmost pixel; visual: ᛒ-shaped glyph
+static const uint8_t bt_off_icon[] = {
+  0x20, 0x60, 0xD0, 0x60, 0xD0, 0x60, 0x20, 0x00
+};
+
+// 8x8 location-pin icon (shown when GPS is active)
+// MSB = leftmost pixel; circle + stem
+static const uint8_t gps_icon[] = {
+  0x70, 0x88, 0xA8, 0x88, 0x70, 0x20, 0x20, 0x00
+};

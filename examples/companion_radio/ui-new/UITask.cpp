@@ -137,11 +137,25 @@ class HomeScreen : public UIScreen {
     int fillWidth = (batteryPercentage * (iconWidth - 4)) / 100;
     display.fillRect(iconX + 2, iconY + 2, fillWidth, iconHeight - 4);
 
-    // show muted icon if buzzer is muted
+    // status icons packed left of the battery, right-to-left: muted, bt_off, gps
+    int statusX = iconX - 1;
 #ifdef PIN_BUZZER
     if (_task->isBuzzerQuiet()) {
+      statusX -= 9;
       display.setColor(DisplayDriver::RED);
-      display.drawXbm(iconX - 9, iconY + 1, muted_icon, 8, 8);
+      display.drawXbm(statusX, iconY + 1, muted_icon, 8, 8);
+    }
+#endif
+    if (!_task->isSerialEnabled()) {
+      statusX -= 9;
+      display.setColor(DisplayDriver::LIGHT);
+      display.drawXbm(statusX, iconY + 1, bt_off_icon, 8, 8);
+    }
+#if ENV_INCLUDE_GPS == 1
+    if (_task->getGPSState()) {
+      statusX -= 9;
+      display.setColor(DisplayDriver::GREEN);
+      display.drawXbm(statusX, iconY + 1, gps_icon, 8, 8);
     }
 #endif
   }
